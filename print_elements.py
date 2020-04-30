@@ -82,4 +82,4 @@ while running:
         pygame.image.save(screen, filename)
         time.sleep(.2)
 
-        running = False
+    running = False
