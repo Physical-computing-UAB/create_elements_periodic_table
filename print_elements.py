@@ -5,6 +5,11 @@ from elements_eng import ele as elements
 
 # The list of elements
 ele = elements
+flag_num_ele = True
+flag_symbol  = True
+flag_mass    = False
+flag_background   = False
+
 
 # set up pygame
 pygame.init()
@@ -12,9 +17,9 @@ screen = pygame.display.set_mode((80,100))
 background = pygame.image.load("frame.png")
 
 font_number = pygame.font.Font('./ttf/CallingCode-Regular.ttf', 12)
-textY_number = 8
-font_symbol = pygame.font.Font('./ttf/CallingCode-Regular.ttf', 40)
-textY_symbol= 24
+textY_number = 8 + 10
+font_symbol = pygame.font.Font('./ttf/orange juice 2.0.ttf', 40)
+textY_symbol= 24 + 10
 font_mass = pygame.font.Font('./ttf/CallingCode-Regular.ttf', 12)
 textX_mass = 25
 textY_mass= 76
@@ -42,7 +47,9 @@ while running:
 
         # First, setup screen and bakground
         screen.fill((255,255,255))
-        screen.blit(background,(0,0))
+
+        if flag_background:
+            screen.blit(background,(0,0))
 
         if (i+1)<10:
             textX_number = 39
@@ -64,7 +71,7 @@ while running:
         else:
             textX_symbol = 19
 
-        print(textX_mass_str)
+        # print(textX_mass_str)
         if len(textX_mass_str) < 6:
             textX_mass = 23
         elif len(textX_mass_str) < 7:
@@ -72,10 +79,15 @@ while running:
         else:
             textX_mass = 16
 
+        if flag_num_ele:
+            print_text(textX_number, textY_number, font_number, text_number_str)
 
-        print_text(textX_number, textY_number, font_number, text_number_str)
-        print_text(textX_symbol, textY_symbol, font_symbol, textX_symbol_str)
-        print_text(textX_mass, textY_mass, font_mass, textX_mass_str)
+        if flag_symbol:
+            print_text(textX_symbol, textY_symbol, font_symbol, textX_symbol_str)
+
+        if flag_mass:
+            print_text(textX_mass, textY_mass, font_mass, textX_mass_str)
+
         pygame.display.update()
 
         filename = "./imgs/{}.jpg".format(i+1)
